@@ -1,0 +1,8 @@
+{
+    "autoload": {
+        "classmap": [
+            "./"
+        ],
+        "files": ["helpers.php"]
+    }
+}
