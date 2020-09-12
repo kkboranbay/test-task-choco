@@ -64,7 +64,7 @@ class Router
 
     protected function callMethod($controller, $method, $id = null)
     {
-        $controller = new $controller;
+        $controller = new $controller();
 
         if (! method_exists($controller, $method)) {
             throw new Exception(

@@ -4,7 +4,7 @@ class PromotionController
 {
     public function index()
     {
-        $promotions = App::get('database')->selectAll('promotions');
+        $promotions = PromotionModel::getAll();
 
         if (Request::wantsJson()) {
             return Response::json($promotions);
@@ -17,7 +17,7 @@ class PromotionController
 
     public function show($id)
     {
-        $promotion = App::get('database')->selectOne('promotions', $id);
+        $promotion = PromotionModel::getById($id);
 
         if (Request::wantsJson()) {
             return Response::json($promotion);
@@ -30,15 +30,7 @@ class PromotionController
 
     public function update($id)
     {
-        $promotion = App::get('database')->selectOne('promotions', $id);
-
-        if ($promotion->status == 1) {
-            $params = ['status' => 0];
-        } else {
-            $params = ['status' => 1];
-        }
-
-        if (App::get('database')->update('promotions', $id, $params)) {
+        if (PromotionModel::update($id)) {
             if (Request::wantsJson()) {
                 return Response::json('Updated');
             }
